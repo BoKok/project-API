@@ -36,6 +36,10 @@ const rowContainer = document.getElementById("row-container");
               //create html for game cards
               const gameRow = document.createElement("div")
               gameRow.setAttribute("class","level");
+              //column  class
+              gameRow.classList.add("column", "is-centered");
+              gameRow.classList.add("level-" + i)
+
               const gameCard = document.createElement("div");
               gameCard.setAttribute("class", "gameCard");
               const gameTitle = document.createElement("h2");
@@ -45,6 +49,7 @@ const rowContainer = document.getElementById("row-container");
               const priceEUR = document.createElement("p");
               const rating = document.createElement("p");
 
+
               //populate response data into these elements
               gameTitle.innerHTML = data[i].title;
               let currentThumb = data[i].thumb;
@@ -53,7 +58,17 @@ const rowContainer = document.getElementById("row-container");
               priceEUR.innerHTML = "Euro placeholder"
               rating.innerHTML = "Steam Rating: " + data[i].steamRatingPercent + "%";
               
-              rowContainer.append(gameRow);
+              //column formatting
+              const row = document.createElement("div");
+              if (i % 3 === 0) {
+                row.classList.add("columns");
+                row.classList.add("column-" + i);
+                row.classList.add("column-" + (i + 1));
+                row.classList.add("column-" + (i + 2));
+                rowContainer.append(row)
+              }
+
+              $(".column-" + i).append($(".level-" + i));
               gameRow.append(gameCard);
               gameCard.append(gameTitle);
               gameCard.append(thumbNail);
@@ -61,6 +76,8 @@ const rowContainer = document.getElementById("row-container");
               priceDiv.append(priceUSD);
               priceDiv.append(priceEUR);
               gameCard.append(rating);
+              $(".column-" + i).append(gameRow);
+
             }
 
           });
