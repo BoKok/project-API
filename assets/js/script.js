@@ -37,7 +37,7 @@ const rowContainer = document.getElementById("row-container");
               const gameRow = document.createElement("div")
               gameRow.setAttribute("class","level");
               //column  class
-              gameRow.classList.add("column", "is-centered");
+              gameRow.classList.add("column");
               gameRow.classList.add("level-" + i)
 
               const gameCard = document.createElement("div");
