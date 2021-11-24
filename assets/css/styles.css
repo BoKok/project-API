@@ -5,3 +5,15 @@
 .title {
     text-align: center;
 }
+
+img {
+    width: 200px;
+    height: auto;
+}
+
+.gameCard {
+    width: 200px;
+    height: 300px;
+    border: solid thin;
+    padding: 5px;
+}
