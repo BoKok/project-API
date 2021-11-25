@@ -70,6 +70,11 @@ const rowContainer = document.getElementById("row-container");
               priceDiv.append(priceEUR);
               gameCard.append(rating);
               $(".column-" + i).append(gameRow);
+              gameCard.classList.add("has-background-grey-lighter");
+              $("h2").addClass("title is-4");
+              $("p").addClass("is-size-5");
+              $("p").addClass("has-text-weight-semibold");
+
 
             }
           });
