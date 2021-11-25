@@ -1,23 +1,3 @@
-var getCurrencyData = function () {
-    var apiUrl = 'https://free.currconv.com/api/v7/convert?q=USD_EUR&compact=ultra&apiKey=56ae4aece0ac2ac705cf';
-  
-    fetch(apiUrl)
-      .then(function (response) {
-        if (response.ok) {
-          response.json().then(function (data) {
-            console.log(data);
-            
-          });
-        } else {
-          
-        }
-      })
-      .catch(function (error) {
-        
-      });
-  };
-
- // getCurrencyData();
 
 const rowContainer = document.getElementById("row-container");
 
@@ -29,7 +9,20 @@ const rowContainer = document.getElementById("row-container");
         if (response.ok) {
           
           response.json().then(function (data) {
-            console.log(data);
+            // console.log(data);
+
+            var apiUrl = 'https://free.currconv.com/api/v7/convert?q=USD_EUR&compact=ultra&apiKey=56ae4aece0ac2ac705cf';
+  
+            fetch(apiUrl)
+              .then(function (response) {
+        
+                  response.json().then(function (data2) {
+                    console.log(data2.USD_EUR);
+
+
+
+
+
             //loop through each array item
             for (i=0; i < data.length; i++) {
               //create html for game cards
@@ -58,7 +51,7 @@ const rowContainer = document.getElementById("row-container");
               let currentThumb = data[i].thumb;
               thumbNail.setAttribute("src", currentThumb);
               priceUSD.innerHTML = "$" + data[i].salePrice;
-              priceEUR.innerHTML = "Euro placeholder"
+              priceEUR.innerHTML = "€" + (data[i].salePrice * data2.USD_EUR).toFixed(2);
               rating.innerHTML = "Steam Rating: " + data[i].steamRatingPercent + "%";
               
               //column formatting
@@ -81,8 +74,16 @@ const rowContainer = document.getElementById("row-container");
               priceDiv.append(priceEUR);
               gameCard.append(rating);
               $(".column-" + i).append(gameRow);
+              gameCard.classList.add("has-background-grey-lighter");
+              $("h2").addClass("title is-4");
+              $("p").addClass("is-size-5");
+              $("p").addClass("has-text-weight-semibold");
+
 
             }
+          });
+
+        });
 
           });
         } else {
