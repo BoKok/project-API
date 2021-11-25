@@ -19,3 +19,6 @@ img {
     padding: 5px;
 }
 
+.noTextDecoration {
+    text-decoration: none;
+}

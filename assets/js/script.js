@@ -24,9 +24,9 @@ const rowContainer = document.getElementById("row-container");
 
 
             //loop through each array item
-
             for (i=0; i < data.length; i++) {
               //create html for game cards
+              
               const gameRow = document.createElement("div")
               gameRow.setAttribute("class","level");
               //column  class
@@ -36,15 +36,18 @@ const rowContainer = document.getElementById("row-container");
               const gameCard = document.createElement("div");
               gameCard.setAttribute("class", "gameCard");
               const gameTitle = document.createElement("h2");
+              const reviewLink = document.createElement("a");
               const thumbNail = document.createElement("img");
               const priceDiv = document.createElement("div");
               const priceUSD = document.createElement("p");
               const priceEUR = document.createElement("p");
               const rating = document.createElement("p");
-
+              const buildMetaLink = "https://www.metacritic.com" + data[i].metacriticLink;
 
               //populate response data into these elements
-              gameTitle.innerHTML = data[i].title;
+              reviewLink.innerHTML = data[i].title;
+              reviewLink.setAttribute("href", buildMetaLink);
+              reviewLink.setAttribute("target", "_blank");
               let currentThumb = data[i].thumb;
               thumbNail.setAttribute("src", currentThumb);
               priceUSD.innerHTML = "$" + data[i].salePrice;
@@ -64,6 +67,7 @@ const rowContainer = document.getElementById("row-container");
               $(".column-" + i).append($(".level-" + i));
               gameRow.append(gameCard);
               gameCard.append(gameTitle);
+              gameTitle.append(reviewLink);
               gameCard.append(thumbNail);
               gameCard.append(priceDiv);
               priceDiv.append(priceUSD);
