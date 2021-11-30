@@ -9,11 +9,19 @@
 img {
     width: 200px;
     height: auto;
+    margin-bottom: 20px;
 }
 
 .gameCard {
-    width: 200px;
+
     height: 300px;
     border: solid thin;
     padding: 5px;
+}
+body {
+    min-height: 100vh;
+}
+
+.noDecoration {
+    text-decoration: none;
 }
