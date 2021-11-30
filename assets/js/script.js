@@ -173,7 +173,7 @@ var getGameData = function () {
         });
       } else {
 
-      }
+      } 
     })
     .catch(function (error) {
 
