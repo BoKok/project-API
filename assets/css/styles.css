@@ -19,6 +19,12 @@ img {
     padding: 5px;
 }
 
+<<<<<<< Updated upstream
 .noTextDecoration {
     text-decoration: none;
+=======
+.hide{
+ display: none;
+
+>>>>>>> Stashed changes
 }
