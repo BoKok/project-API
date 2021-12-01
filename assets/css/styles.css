@@ -9,6 +9,7 @@
 img {
     width: 200px;
     height: auto;
+    margin-bottom: 20px;
 }
 
 .gameCard {
@@ -17,4 +18,10 @@ img {
     border: solid thin;
     padding: 5px;
 }
+body {
+    min-height: 100vh;
+}
 
+.noDecoration {
+    text-decoration: none;
+}
