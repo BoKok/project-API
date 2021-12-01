@@ -1,5 +1,5 @@
 // association with static parent html container
-const rowContainer = document.getElementById("row-container");
+const rowContainer = document.getElementById("sacrifice");
 
 //global variables
 var dealData = [];
@@ -107,22 +107,42 @@ var getGameData = function () {
 
 getGameData();
 
+
+var rHistory = function(historyName) {
+  $("#searchBar").val(historyName);
+  gameSearch();
+}
+
 var gameSearch = function () {
   //search bar/btn setup with html and onclick event
   var searchBar = document.getElementById("searchBar")
   var searchValue = searchBar.value;
 
+  //save input to localStorage
+  
+  if(localStorage.getItem(searchValue) === null) {
+  localStorage.setItem(searchValue, gameSearch);
+  const historyHeader = $("<h4>");
+  historyHeader.text(searchValue)
+  .on("click", function(event) {
+      event.preventDefault();
+      rHistory(event.target.textContent);
+  });
+
+  $(".hHistory").append(historyHeader);
+}
+  
   // take deal data array and filter for objects based on title match and send those matches to the filteredData
   filteredData = dealData.filter(dealData => dealData.title.toLowerCase().includes(searchValue.toLowerCase()));
 
   //clear all html for game cards
-  document.getElementById("row-container").remove();
+  document.getElementById("sacrifice").remove();
 
   //rebuild the parent container dynamically
   var parentContainer = document.createElement("div");
-  parentContainer.setAttribute("id", "row-container");
-  parentContainer.classList.add("container");
-  document.body.appendChild(parentContainer);
+  parentContainer.setAttribute("id", "sacrifice");
+  parentContainer.classList.add("column");
+  $(".baseSet").append(parentContainer);
 
   if (filteredData.length === 0) {
     var noMatches = document.createElement("h3");
@@ -149,8 +169,8 @@ var gameSearch = function () {
       const priceEUR = document.createElement("p");
       const rating = document.createElement("p");
       const metaLink = document.createElement("a");
-      const buildMetaLink = "https://www.metacritic.com" + dealData[i].metacriticLink;
-      const buildSteamLink = "https://store.steampowered.com/app/" + dealData[i].steamAppID;
+      const buildMetaLink = "https://www.metacritic.com" + filteredData[i].metacriticLink;
+      const buildSteamLink = "https://store.steampowered.com/app/" + filteredData[i].steamAppID;
 
       //populate response data into these elements
       //steam links
@@ -219,3 +239,14 @@ searchBar.addEventListener("keypress", function (e) {
 //h1 association
 var gameGrab = document.getElementById("logo");
 gameGrab.addEventListener("click", refresh);
+
+for(i = 0; i < localStorage.length; i++) {
+  const hHeader = $("<h4>");
+  hHeader.append(localStorage.key([i])).on("click", function(event) {
+    event.preventDefault();
+    rHistory(event.target.textContent);
+});
+  $(".hHistory").append(hHeader);
+
+}
+console.log(localStorage.length)
