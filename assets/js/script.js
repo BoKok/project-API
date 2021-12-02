@@ -240,5 +240,13 @@ searchBar.addEventListener("keypress", function (e) {
 var gameGrab = document.getElementById("logo");
 gameGrab.addEventListener("click", refresh);
 
+for(i = 0; i < localStorage.length; i++) {
+  const hHeader = $("<h4>");
+  hHeader.append(localStorage.key([i])).on("click", function(event) {
+    event.preventDefault();
+    rHistory(event.target.textContent);
+});
+  $(".hHistory").append(hHeader);
 
-$(".hHistory").text(localStorage.key(searchValue));
+}
+console.log(localStorage.length)
