@@ -169,8 +169,8 @@ var gameSearch = function () {
       const priceEUR = document.createElement("p");
       const rating = document.createElement("p");
       const metaLink = document.createElement("a");
-      const buildMetaLink = "https://www.metacritic.com" + dealData[i].metacriticLink;
-      const buildSteamLink = "https://store.steampowered.com/app/" + dealData[i].steamAppID;
+      const buildMetaLink = "https://www.metacritic.com" + filteredData[i].metacriticLink;
+      const buildSteamLink = "https://store.steampowered.com/app/" + filteredData[i].steamAppID;
 
       //populate response data into these elements
       //steam links
