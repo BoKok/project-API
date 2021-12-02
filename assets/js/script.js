@@ -6,9 +6,11 @@ var dealData = [];
 var filteredData = [];
 var currencyData = [];
 
+//main function that pulls in all api data and creates game cards
 var getGameData = function () {
   var apiUrl = 'https://www.cheapshark.com/api/1.0/deals?storeID=1';
 
+  //fetch cheapshark game data
   fetch(apiUrl)
     .then(function (response) {
       if (response.ok) {
@@ -19,6 +21,7 @@ var getGameData = function () {
 
           var apiUrl = 'https://free.currconv.com/api/v7/convert?q=USD_EUR&compact=ultra&apiKey=56ae4aece0ac2ac705cf';
 
+          //fetch currency conversion api data
           fetch(apiUrl)
             .then(function (response) {
 
@@ -28,11 +31,11 @@ var getGameData = function () {
 
                 //loop through each array item
                 for (i = 0; i < dealData.length; i++) {
+                  
                   //create html for game cards
-
                   const gameRow = document.createElement("div")
                   gameRow.setAttribute("class", "level");
-                  //column  class
+                  
                   gameRow.classList.add("column");
                   gameRow.classList.add("level-" + i)
 
@@ -77,6 +80,7 @@ var getGameData = function () {
                     rowContainer.append(row)
                   }
 
+                  //append elements to body
                   $(".column-" + i).append($(".level-" + i));
                   gameRow.append(gameCard);
                   gameCard.append(gameTitle);
@@ -104,10 +108,10 @@ var getGameData = function () {
 
 
 };
-
+//run getGameData function
 getGameData();
 
-
+//function to grab search value and save to history variable
 var rHistory = function(historyName) {
   $("#searchBar").val(historyName);
   gameSearch();
@@ -118,10 +122,11 @@ var gameSearch = function () {
   var searchBar = document.getElementById("searchBar")
   var searchValue = searchBar.value;
 
-  //save input to localStorage
-  
+  //save search input to localStorage
   if(localStorage.getItem(searchValue) === null) {
   localStorage.setItem(searchValue, gameSearch);
+
+  //create h4 for each search term
   const historyHeader = $("<h4>");
   historyHeader.text(searchValue)
   .on("click", function(event) {
@@ -129,6 +134,7 @@ var gameSearch = function () {
       rHistory(event.target.textContent);
   });
 
+  //append each search term to the history header
   $(".hHistory").append(historyHeader);
 }
   
@@ -144,6 +150,7 @@ var gameSearch = function () {
   parentContainer.classList.add("column");
   $(".baseSet").append(parentContainer);
 
+  //if there are no game titles that match the users search, throw error message
   if (filteredData.length === 0) {
     var noMatches = document.createElement("h3");
     noMatches.innerHTML = "Sorry, there are no deals that match your search. Try again!";
@@ -198,7 +205,7 @@ var gameSearch = function () {
         row.classList.add("column-" + (i + 2));
         parentContainer.append(row)
       }
-
+      //append elements to body
       $(".column-" + i).append($(".level-" + i));
       gameRow.append(gameCard);
       gameCard.append(gameTitle);
@@ -240,6 +247,7 @@ searchBar.addEventListener("keypress", function (e) {
 var gameGrab = document.getElementById("logo");
 gameGrab.addEventListener("click", refresh);
 
+//append local storage key to each search history element
 for(i = 0; i < localStorage.length; i++) {
   const hHeader = $("<h4>");
   hHeader.append(localStorage.key([i])).on("click", function(event) {
@@ -249,4 +257,3 @@ for(i = 0; i < localStorage.length; i++) {
   $(".hHistory").append(hHeader);
 
 }
-console.log(localStorage.length)
